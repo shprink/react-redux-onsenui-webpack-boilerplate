@@ -1,0 +1,47 @@
+env:
+  browser: true
+  node: true
+  es6: true
+
+extends:
+  - eslint:recommended
+  - google
+
+plugins:
+  - react
+
+parser: babel-eslint
+
+globals:
+  __webpack_public_path__: true
+  __DEV__: true
+
+parserOptions:
+  ecmaVersion: 7
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+    experimentalObjectRestSpread: true
+
+rules:
+  # two spaces with indents for switch/case
+  indent: [1, 2, {"SwitchCase": 1}]
+
+  # don't require strict mode
+  strict: 0
+
+  # allow console.log()
+  no-console: 0
+
+  quotes: [1, "single", "avoid-escape"]
+  object-curly-spacing: ["error", "always"]
+
+  # do not require semi-colons
+  semi: [0]
+
+  # require unix line-endings
+  linebreak-style: [2, "unix"]
+
+  react/jsx-uses-react: 1
+  react/jsx-no-undef: 1
+  react/jsx-uses-vars: 1
