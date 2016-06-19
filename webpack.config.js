@@ -49,7 +49,9 @@ module.exports = {
       'react',
       'react-dom',
       'onsenui'
-    ]
+    ],
+    styl: path.join(__dirname, 'src', 'styl', 'index.styl'),
+    scss: path.join(__dirname, 'src', 'scss', 'index.scss')
   },
 
   output: {
@@ -59,21 +61,33 @@ module.exports = {
   },
   module: {
     preLoaders: [
-      //Eslint loader
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'eslint' }
+      { test: /\.js?$/, include: /src/, loader: 'eslint' }
     ],
     loaders: [
-      { test: /\.html$/, loaders: ['raw'] },
-      { test: /\.json$/, loaders: ['json'] },
-      { test: /\.(png|jpg|svg)$/, loader: 'file?name=img/[ext]/[name].[ext]' },
-      { test: /\.css$/, loaders: ['style', 'css?modules&localIdentName=[local]---[hash:base64:5]', 'postcss'] },
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] },
-      { test: [/ionicons\.svg/, /ionicons\.eot/, /ionicons\.ttf/, /ionicons\.woff/], loader: 'file?name=fonts/[name].[ext]' }
+      { test: /\.html$/, include: /src/, loaders: ['raw'] },
+      { test: /\.json$/, include: /src/, loaders: ['json'] },
+      { test: /\.(png|jpg|svg)$/, include: /src/, loader: 'file?name=img/[ext]/[name].[ext]' },
+      { test: /\.styl$/, loaders: ['style', 'css', 'stylus'] },
+      { test: /\.scss$/, loaders: ['style', 'css', 'sass'] },
+      { test: /\.css$/, include: /src/, loaders: ['style', 'css?modules&localIdentName=[local]---[hash:base64:5]', 'postcss'] },
+      { test: /\.js?$/, include: /src/, loaders: ['react-hot', 'babel'] },
+      {
+        test: [
+          /ionicons\.svg/, /ionicons\.eot/, /ionicons\.ttf/, /ionicons\.woff/,
+          /fontawesome-webfont\.svg/, /fontawesome-webfont\.eot/, /fontawesome-webfont\.ttf/, /fontawesome-webfont\.woff/,
+          /Material-Design-Iconic-Font\.svg/, /Material-Design-Iconic-Font\.eot/, /Material-Design-Iconic-Font\.ttf/, /Material-Design-Iconic-Font\.woff/, /Material-Design-Iconic-Font\.woff2/
+        ], loader: 'file?name=fonts/[name].[ext]'
+      }
+    ]
+  },
+  sassLoader: {
+    includePaths: [
+      "node_modules/ionicons/dist/scss"
     ]
   },
   plugins: plugins,
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx', '.json', '.css', '.scss', '.styl']
   },
   postcss: function (webpack) {
     return [

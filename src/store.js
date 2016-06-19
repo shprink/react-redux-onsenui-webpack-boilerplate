@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 
-export default function configureStore(initialState) {
+export default initialState => {
   let middleware = applyMiddleware(thunk);
 
   if (process.env.NODE_ENV !== 'production') {

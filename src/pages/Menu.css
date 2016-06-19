@@ -1,0 +1,12 @@
+@import '../css/_variables';
+.root {
+    background-color: red;
+}
+
+.menuList {}
+
+.menuItem {
+    &:global.disabled {
+        background-color: var(--grey100);
+    }
+}
