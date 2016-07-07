@@ -37,6 +37,18 @@ export default class Navigator extends React.Component {
       <route.component navigator={navigator} {...route} />
     );
   }
+  onPostPop = (e, v) => {
+    console.log('onPostPop', e.navigator.page, e.enterPage, e.leavePage)
+  }
+  onPostPush = (e, v) => {
+    console.log('onPostPush', e.navigator.pages, e.enterPage.title, e.leavePage)
+  }
+  onPrePush = (e, v) => {
+    console.log('onPrePush', e.currentPage)
+  }
+  onPrePop = (e, v) => {
+    console.log('onPrePop', e.currentPage)
+  }
   render() {
     const { openMenu, closeMenu, isOpen, currentRoute } = this.props;
     return (
@@ -58,6 +70,10 @@ export default class Navigator extends React.Component {
           <OnsNavigator
             initialRoute={initialRoute}
             renderPage={this.renderPage}
+            onPrePush={this.onPrePush}
+            onPostPush={this.onPostPush}
+            onPrePop={this.onPrePop}
+            onPostPop={this.onPostPop}
             />
         </SplitterContent>
       </Splitter>
